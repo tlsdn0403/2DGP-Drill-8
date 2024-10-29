@@ -12,7 +12,7 @@ class Idle:
         elif right_up(e) or left_down(e) or start_event(e):
             boy.action = 3
             boy.face_dir = 1
-
+            
         boy.frame = 0
         boy.dir = 0
 
@@ -103,6 +103,12 @@ class Auto_Run:
     @staticmethod
     def exit(boy, e):
         boy.scale = 1.0
+        if boy.dir==1:
+                boy.action=3
+                boy.face_dir = -1
+        elif boy.dir==-1:
+            boy.action = 2
+            boy.face_dir=-1
         pass
 
     @staticmethod
@@ -146,7 +152,7 @@ class Boy:
                 Idle: {right_down: Run, left_down: Run, left_up: Run, right_up: Run, time_out: Sleep, auto_run: Auto_Run},
                 Run: {right_down: Idle, left_down: Idle, right_up: Idle, left_up: Idle, auto_run: Auto_Run},
                 Sleep: {right_down: Run, left_down: Run, right_up: Run, left_up: Run, space_down: Idle, auto_run: Auto_Run},
-                Auto_Run: {auto_run: Idle,time_out: Sleep,right_down: Run, left_down: Run, left_up: Run, right_up: Run}  # a 키를 다시 누르면 Idle로 돌아감
+                Auto_Run: {auto_run: Idle,time_out: Idle,right_down: Run, left_down: Run, left_up: Run, right_up: Run}  # a 키를 다시 누르면 Idle로 돌아감
             }
         )
 
